@@ -4,3 +4,8 @@ numpy
 seaborn
 matplotlib
 scikit-learn
+pylab
+scipy
+streamlit
+streamlit_option_menu
+streamlit_extras
