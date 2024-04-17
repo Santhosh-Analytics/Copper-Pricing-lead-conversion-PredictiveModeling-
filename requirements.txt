@@ -9,3 +9,5 @@ scipy
 streamlit
 streamlit_option_menu
 streamlit_extras
+xgboost
+imblearn
