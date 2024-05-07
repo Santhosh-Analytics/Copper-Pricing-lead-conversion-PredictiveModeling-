@@ -12,3 +12,5 @@ xgboost
 imblearn
 ipykernel
 colorama
+stats
+statsmodels
