@@ -9,7 +9,7 @@
 
 ## Table of Contents
 
-<a href="#overview"><img alt="Static Badge" src="https://img.shields.io/badge/Overview_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#overview"><img alt="Static Badge" src="https://img.shields.io/badge/Overview_-blue?style=--&logo=headspace&logoColor=maroon&ogoSize=auto" style="font-size: 30px; font-weight: bold;"></a> &nbsp;
 <a href="#problem-statement"><img alt="Static Badge" src="https://img.shields.io/badge/Problem%20Statement_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
 <a href="#data-source"><img alt="Static Badge" src="https://img.shields.io/badge/Data%20Source_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
 <a href="#prerequisites"><img alt="Static Badge" src="https://img.shields.io/badge/Prerequisites_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
