@@ -9,7 +9,9 @@
 
 ## Table of Contents
 
-[Overview](#overview) | [Problem Statement](#problem-statement) | [Data Source](#data-source) | [Prerequisites](#prerequisites) | [Installation](#installation) | [Usage](#usage) | [Models](#models) | [Streamlit GUI](#streamlit-gui) | [Contributing](#contributing) | [License](#license) | [Contact](#contact)
+[Overview](#overview) | [Problem Statement](#problem-statement) | [Data Source](#data-source) | [Prerequisites](#prerequisites) | [Installation](#installation) | [Usage](#usage) | [Models](#models) | [Streamlit GUI](#streamlit-gui) | [Contributing](#contributing) | [License](#license) | [Contact](#contact) | <a href="#overview">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Overview-darkgreen?style=flat-square&logo=pushbullet&logoColor=white">
+</a>
 
 
   
@@ -37,9 +39,13 @@ The copper industry dataset used in this project should be provided or specified
 
 Before running the project, ensure you have the following prerequisites installed:
 
-- Python: Version 3.07 or higher. [Download Python](https://www.python.org/downloads/)
-- Required packages : <img alt="Static Badge" src="https://img.shields.io/badge/-Install_using_pip-maroon?style=plastic&logoColor=white&logo=Python&label=Pandas--NumP--SKlearn--Seaborn--Matplotlib--Streamlit&labelColor=maroon&color=darkgreen"> , Or
-- Install dependencies: ```pip install -r requirements.txt```
+- Python: Version 3.07 or higher. <a href="https://www.python.org/downloads">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Download_Python-darkgreen?style=flat-square&logo=python&logoColor=white">
+</a>
+
+- Required packages : <img alt="Static Badge" src="https://img.shields.io/badge/Pandas--NumP--SKlearn--Seaborn--Matplotlib--Streamlit-darkgreen?style=flat-square&logo=pypi&logoColor=white">
+
+- Install dependencies: <img alt="Static Badge" src="https://img.shields.io/badge/pip install --r requirements.txt-darkgreen?style=flat-square&logo=pypi&logoColor=white">
 
 ## Installation
 
