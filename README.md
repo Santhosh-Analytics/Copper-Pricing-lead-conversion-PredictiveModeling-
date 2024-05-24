@@ -1,6 +1,11 @@
-# Copper Modeling Project
+<div align="center">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Copper-Modeling-darkgreen?style=for-the-badge&logo=Python&logoColor=%23FFFFFF">
+</div>
 
-A comprehensive machine learning project to analyze and model the copper industry data, addressing challenges such as skewness, noisy data, and lead classification.
+# <div align="center"> Copper Modeling Project</div>
+<div align="center"> A comprehensive machine learning project to analyze and model the copper industry data, addressing challenges such as skewness, noisy data, and lead classification. </div>
+
+
 
 ## Table of Contents
 
