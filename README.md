@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Copper-Modeling-darkgreen?style=for-the-badge&logo=Python&logoColor=%23FFFFFF">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Modeling-maroon?style=for-the-badge&logoColor=white&logo=Python&label=Copper&labelColor=maroon&color=darkgreen">
 </div>
 
 # <div align="center"> Copper Modeling Project</div>
@@ -33,7 +33,9 @@ The project addresses the following objectives:
 2. Transform the data into a suitable format and perform necessary cleaning and pre-processing steps.
 3. Build a machine learning regression model to predict the continuous variable 'Selling_Price'.
 4. Develop a machine learning classification model to predict lead status (WON or LOST).
-5. Create a Streamlit application where users can input column values and obtain predicted 'Selling_Price' or 'Status' (WON/LOST).
+5. Evaluate the model using appropriate evaluation metrics such as accuracy, precision, recall, F1 score, and AUC curve for Classification problem and R2 Score, Error metrics for Regression problem. 
+6. Regularize the model by leveraging advanced techniques such as cross-validation and grid search to find the best-performing model.
+7. Create a Streamlit application where users can input column values and obtain predicted 'Selling_Price' or 'Status' (WON/LOST).
 
 ## Data Source
 
@@ -43,13 +45,9 @@ The copper industry dataset used in this project should be provided or specified
 
 Before running the project, ensure you have the following prerequisites installed:
 
-- Python (version 3.7 or higher)
-- NumPy
-- Pandas
-- Scikit-learn
-- Matplotlib
-- Seaborn
-- Streamlit
+- Python: Version 3.07 or higher. [Download Python](https://www.python.org/downloads/)
+- Required packages : <img alt="Static Badge" src="https://img.shields.io/badge/-Install_using_pip-maroon?style=plastic&logoColor=white&logo=Python&label=Pandas--NumP--SKlearn--Seaborn--Matplotlib--Streamlit&labelColor=maroon&color=darkgreen"> , Or
+- Install dependencies: ```pip install -r requirements.txt```
 
 ## Installation
 
