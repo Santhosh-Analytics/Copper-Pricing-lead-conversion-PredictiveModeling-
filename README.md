@@ -25,8 +25,7 @@
 
   
 
-[![Overview](https://img.shields.io/badge/Overview-blue?style=for-the-badge)](#overview)
-
+## Overview
 This project aims to develop machine learning models to address the challenges faced by the copper industry in pricing and lead classification. By leveraging advanced techniques such as data normalization, feature scaling, and outlier detection, the project delivers robust solutions for accurate pricing decisions and effective lead classification.
 
 ## Problem Statement
