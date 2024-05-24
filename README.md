@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Modeling-maroon?style=for-the-badge&logoColor=white&logo=Python&label=Copper&labelColor=maroon&color=darkgreen">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Modeling-blue?style=for-the-badge&logoColor=white&logo=Python&label=Copper&labelColor=grey&color=blue">
 </div>
 
 # <div align="center"> Copper Modeling Project</div>
@@ -9,18 +9,10 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Problem Statement](#problem-statement)
-- [Data Source](#data-source)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Models](#models)
-- [Streamlit GUI](#streamlit-gui)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+[Overview](#overview) | [Problem Statement](#problem-statement) | [Data Source](#data-source) | [Prerequisites](#prerequisites) | [Installation](#installation) | [Usage](#usage) | [Models](#models) | [Streamlit GUI](#streamlit-gui) | [Contributing](#contributing) | [License](#license) | [Contact](#contact)
 
+
+  
 ## Overview
 
 This project aims to develop machine learning models to address the challenges faced by the copper industry in pricing and lead classification. By leveraging advanced techniques such as data normalization, feature scaling, and outlier detection, the project delivers robust solutions for accurate pricing decisions and effective lead classification.
