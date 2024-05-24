@@ -9,9 +9,18 @@
 
 ## Table of Contents
 
-[Overview](#overview) | [Problem Statement](#problem-statement) | [Data Source](#data-source) | [Prerequisites](#prerequisites) | [Installation](#installation) | [Usage](#usage) | [Models](#models) | [Streamlit GUI](#streamlit-gui) | [Contributing](#contributing) | [License](#license) | [Contact](#contact) | <a href="#overview">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Overview-darkgreen?style=flat-square&logo=pushbullet&logoColor=white">
-</a>
+<a href="#overview"><img alt="Static Badge" src="https://img.shields.io/badge/Overview_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#problem-statement"><img alt="Static Badge" src="https://img.shields.io/badge/Problem%20Statement_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#data-source"><img alt="Static Badge" src="https://img.shields.io/badge/Data%20Source_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#prerequisites"><img alt="Static Badge" src="https://img.shields.io/badge/Prerequisites_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#installation"><img alt="Static Badge" src="https://img.shields.io/badge/Installation_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#usage"><img alt="Static Badge" src="https://img.shields.io/badge/Usage_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#models"><img alt="Static Badge" src="https://img.shields.io/badge/Models_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#streamlit-gui"><img alt="Static Badge" src="https://img.shields.io/badge/Streamlit%20GUI_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#contributing"><img alt="Static Badge" src="https://img.shields.io/badge/Contributing_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#license"><img alt="Static Badge" src="https://img.shields.io/badge/License_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a>
+<a href="#contact"><img alt="Static Badge" src="https://img.shields.io/badge/Contact_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a>
+
 
 
   
