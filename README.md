@@ -9,22 +9,23 @@
 
 ## Table of Contents
 
-<a href="#overview"><img alt="Static Badge" src="https://img.shields.io/badge/Overview_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#problem-statement"><img alt="Static Badge" src="https://img.shields.io/badge/Problem%20Statement_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#data-source"><img alt="Static Badge" src="https://img.shields.io/badge/Data%20Source_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#prerequisites"><img alt="Static Badge" src="https://img.shields.io/badge/Prerequisites_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#installation"><img alt="Static Badge" src="https://img.shields.io/badge/Installation_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#usage"><img alt="Static Badge" src="https://img.shields.io/badge/Usage_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#models"><img alt="Static Badge" src="https://img.shields.io/badge/Models_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#streamlit-gui"><img alt="Static Badge" src="https://img.shields.io/badge/Streamlit%20GUI_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#contributing"><img alt="Static Badge" src="https://img.shields.io/badge/Contributing_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a> &nbsp;
-<a href="#license"><img alt="Static Badge" src="https://img.shields.io/badge/License_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a>
-<a href="#contact"><img alt="Static Badge" src="https://img.shields.io/badge/Contact_-blue?style=flat-square&logo=headspace&logoColor=maroon"></a>
+<a href="#overview"><img alt="Static Badge" src="https://img.shields.io/badge/Overview_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#problem-statement"><img alt="Static Badge" src="https://img.shields.io/badge/Problem%20Statement_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#data-source"><img alt="Static Badge" src="https://img.shields.io/badge/Data%20Source_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#prerequisites"><img alt="Static Badge" src="https://img.shields.io/badge/Prerequisites_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#installation"><img alt="Static Badge" src="https://img.shields.io/badge/Installation_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#usage"><img alt="Static Badge" src="https://img.shields.io/badge/Usage_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#models"><img alt="Static Badge" src="https://img.shields.io/badge/Models_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#streamlit-gui"><img alt="Static Badge" src="https://img.shields.io/badge/Streamlit%20GUI_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#contributing"><img alt="Static Badge" src="https://img.shields.io/badge/Contributing_-blue?style=--&logo=headspace&logoColor=maroon"></a> &nbsp;
+<a href="#license"><img alt="Static Badge" src="https://img.shields.io/badge/License_-blue?style=--&logo=headspace&logoColor=maroon"></a>
+<a href="#contact"><img alt="Static Badge" src="https://img.shields.io/badge/Contact_-blue?style=--&logo=headspace&logoColor=maroon"></a>
 
 
 
   
-## Overview
+
+[![Overview](https://img.shields.io/badge/Overview-blue?style=for-the-badge)](#overview)
 
 This project aims to develop machine learning models to address the challenges faced by the copper industry in pricing and lead classification. By leveraging advanced techniques such as data normalization, feature scaling, and outlier detection, the project delivers robust solutions for accurate pricing decisions and effective lead classification.
 
@@ -49,12 +50,12 @@ The copper industry dataset used in this project should be provided or specified
 Before running the project, ensure you have the following prerequisites installed:
 
 - Python: Version 3.07 or higher. <a href="https://www.python.org/downloads">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Download_Python-darkgreen?style=flat-square&logo=python&logoColor=white">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Download_Python-darkgreen?style=--&logo=python&logoColor=white">
 </a>
 
-- Required packages : <img alt="Static Badge" src="https://img.shields.io/badge/Pandas--NumP--SKlearn--Seaborn--Matplotlib--Streamlit-darkgreen?style=flat-square&logo=pypi&logoColor=white">
+- Required packages : <img alt="Static Badge" src="https://img.shields.io/badge/Pandas--NumP--SKlearn--Seaborn--Matplotlib--Streamlit-darkgreen?style=--&logo=pypi&logoColor=white">
 
-- Install dependencies: <img alt="Static Badge" src="https://img.shields.io/badge/pip install --r requirements.txt-darkgreen?style=flat-square&logo=pypi&logoColor=white">
+- Install dependencies: <img alt="Static Badge" src="https://img.shields.io/badge/pip install --r requirements.txt-darkgreen?style=--&logo=pypi&logoColor=white">
 
 ## Installation
 
