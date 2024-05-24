@@ -52,3 +52,57 @@ Before running the project, ensure you have the following prerequisites installe
 
    ```bash
    git clone https://github.com/your-username/copper-modeling.git
+2. Navigate to the project directory:
+   ```bash
+   cd copper-modeling
+3. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
+
+## Usage
+
+Prepare the data:
+
+Obtain the copper industry dataset and place it in the appropriate directory.
+
+
+## Run the data preprocessing scripts:
+
+Execute the scripts to handle missing values, treat outliers, and address skewness in the dataset.
+Perform feature engineering and encoding as required.
+
+
+## Train the models:
+
+Run the scripts to train the regression model for predicting 'Selling_Price'.
+Train the classification model for predicting lead status (WON or LOST).
+
+
+## Launch the Streamlit application:
+
+Execute the Streamlit script to start the interactive application.
+Input the required column values and obtain predictions for 'Selling_Price' or 'Status' (WON/LOST).
+
+
+
+## Models
+The project includes the following machine learning models:
+
+Regression model: [Model name(s)] for predicting the continuous variable 'Selling_Price'.
+Classification model: [Model name(s)] for predicting lead status (WON or LOST).
+
+## Streamlit GUI
+The project includes a user-friendly Streamlit application that allows users to input column values and obtain predictions for 'Selling_Price' or 'Status' (WON/LOST) based on the trained models.
+Contributing
+Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+## License
+This project is licensed under the MIT License.
+## Contact
+
+If you have any questions or need further assistance, feel free to reach out to the project maintainers:
+
+Name: [Your Name]
+Email: [your-email@example.com]
+
+
+
