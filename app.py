@@ -5,12 +5,12 @@ import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
 
-image='ss'
+image='ss.jpg'
 
 st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
-    page_title="Airbnb Analysis",
+    page_title="Copper Modeling",
     page_icon=image,
     )
 
