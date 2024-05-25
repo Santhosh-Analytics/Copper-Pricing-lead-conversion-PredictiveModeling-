@@ -1,6 +1,8 @@
-FROM    python: 3.7
+FROM python:3.7
 COPY . /app
 WORKDIR /app    
-RUN pip intall -r requirements.txt
+RUN apt-get update
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt --index-url https://pypi.tuna.tsinghua.edu.cn/simple
 EXPOSE 8501
-CMD streamlit  --workers=6 --bind 0.0.0.0:8501 run app.pygit
+CMD [ "streamlit","run","app.py" ]

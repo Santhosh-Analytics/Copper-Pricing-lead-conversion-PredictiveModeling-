@@ -1,25 +1,20 @@
-name: Streamlit Cloud Deployment
+name: Deploy Streamlit App
 
-on:
-  push:
-    branches:
-      - 'main'
+on: push: {}  # Trigger on any push event
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up QEMU (optional)
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx (optional)
-        uses: docker/setup-buildx-action@v3
-      - name: Build Docker Image
-        run: docker build -t your-username/your-app-name:latest .  # Replace placeholders
-
-      - name: Deploy to Streamlit Cloud
-        uses: streamlit/deploy-app@v1
+      - uses: actions/checkout@v3  # Checkout code from repository
+      - name: Use Python version 3.x
+        uses: actions/setup-python@v3
         with:
-          api_key: ${{ secrets.STREAMLIT_API_KEY }}  # Replace with your Streamlit API key
+          python-version: '3.x'  # Or a specific version (e.g., '3.8')
+      - name: Install dependencies
+        run: pip install -r requirements.txt  # Replace with your requirements file
+      - name: Deploy to Streamlit Cloud (if using Streamlit Cloud)
+        uses: streamlit/deploy-app@v1  # Specific action for Streamlit Cloud
+        with:
+          api_key: ${{ secrets.STREAMLIT_API_KEY }}
           file_glob: '**/*.py'  # Adjust file pattern if needed
-

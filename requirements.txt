@@ -3,7 +3,7 @@ openpyxl
 numpy
 seaborn
 matplotlib
-scikit-learn
+scikit_learn
 scipy
 streamlit
 streamlit_option_menu

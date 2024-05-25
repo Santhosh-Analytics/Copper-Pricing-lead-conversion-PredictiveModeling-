@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 import streamlit as st
-from streamlit_extras.add_vertical_space import add_vertical_space
+# from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
 
 # image='ss.jpg'
