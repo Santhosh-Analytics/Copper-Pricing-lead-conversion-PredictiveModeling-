@@ -5,13 +5,13 @@ import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
 
-image='ss.jpg'
+# image='ss.jpg'
 
 st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     page_title="Copper Modeling",
-    page_icon=image,
+    page_icon='https://www.shirepost.com/cdn/shop/files/WOR-HAM-RAW-CO-1.jpg?v=1710180524&width=1800',
     )
 
 with st.sidebar:
