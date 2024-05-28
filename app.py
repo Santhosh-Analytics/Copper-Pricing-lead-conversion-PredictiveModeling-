@@ -7,6 +7,8 @@ from scipy.stats import boxcox
 import pickle
 from datetime import date, timedelta
 from streamlit_option_menu import option_menu
+from scipy.special import inv_boxcox
+
 
 # Function to perform Box-Cox transformation on a single value using a given lambda
 def transform_single_value(value, lmbda):
@@ -14,6 +16,9 @@ def transform_single_value(value, lmbda):
         return None  # Handle missing value
     transformed_value = boxcox([value], lmbda=lmbda)[0]
     return transformed_value
+
+def reverse_boxcox_transform(predicted, lambda_val):
+    return inv_boxcox(predicted, lambda_val)
 
 # Load the saved lambda values
 with open(r'pkls/boxcox_lambdas.pkl', 'rb') as f:
@@ -28,6 +33,15 @@ with open(r'pkls/scale_class.pkl', 'rb') as f:
 
 with open(r'pkls/xgb_classifier_model.pkl', 'rb') as f:
     xgb_classifier_model = pickle.load(f)
+    
+with open(r'pkls\\Reg_ohe.pkl', 'rb') as f:
+    Reg_ohe = pickle.load(f)
+    
+with open(r'pkls\\scale_reg.pkl', 'rb') as f:
+    scale_reg = pickle.load(f)
+
+with open(r'pkls\\xgb_regression_model.pkl', 'rb') as f:
+    xgb_Reg = pickle.load(f)
     
 st.set_page_config(
     layout="wide",
@@ -56,7 +70,7 @@ with st.sidebar:
 # st.markdown(""" <style> button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {font-size: 32px;} </style>""", unsafe_allow_html=True)
 # st.markdown('<style>div.css-1jpvgo6 {font-size: 18px; font-weight: bolder; font-family: inherit;} </style>', unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; font-size: 38px; color: #FF385C; font-weight: 700; font-family: inherit;'>Streamline Your Copper Business: Pricing & Lead Management</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 38px; color: #55ACEE; font-weight: 700; font-family: inherit;'>Streamline Your Copper Business: Pricing & Lead Management</h1>", unsafe_allow_html=True)
 st.markdown("<hr style='border: 2px solid beige;'>", unsafe_allow_html=True)
 
 if selected == "About":
@@ -77,7 +91,7 @@ if selected == "About":
     </p>""".format(github_url), unsafe_allow_html=True)
 
 if selected == "Predictor":
-    tab, tab1 = st.tabs(["***Price Prediction***", "***Lead Classification***"])
+    tab, tab1 = st.tabs(["***Lead Classification***", "***Price Prediction***"])
     
     with tab:
         # Options for various dropdowns
@@ -103,15 +117,15 @@ if selected == "Predictor":
             del_date = st.date_input('Delivery Date', min_value=del_min, max_value=six_months_after, help='Enter product/order date, must be today or within the next six months', value=None)
             item = st.selectbox('Select Item Type', item_type_options, index=None, help="Select Item type from the dropdown menu", placeholder="Select Item type from the dropdown menu")
             country = st.selectbox('Select Country Code', country_options, index=None, placeholder="Select Country Code from the list")
-            app = st.selectbox('Select Application', application_options)
+            app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
             
 
         with col2:
-          prod = st.selectbox('Select Product', product_options)
+          prod = st.selectbox('Select Product', product_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
             # cust = st.number_input('Customer Number', min_value=30000000, max_value=39999999, value=None, help='Enter Customer number. Min value is 30000000 and max value is 39999999', placeholder='Enter Customer number. Min value is 30000000 and max value is 39999999')
-          thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Enter the thickness of the product. Min value is 0.10 and max value is 7.', placeholder='Enter Thickness of the product. Min value is 0.10 and max value is 7.')
-          width = st.number_input('Width', min_value=500, max_value=2000, value=None, help='Enter the width of the product. Min value is 500 and max value is 2000', placeholder='Enter width of the product. Min value is 0.10 and max value is 7.')
-          qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help='Enter the quantity in tons. Min value is 1.00 and max value is 2.00', placeholder='Enter the quantity in tons. Min value is 1.00 and max value is 2.00')
+          thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Min value is 0.10 and max value is 7.', placeholder='Min value is 0.10 and max value is 7.')
+          width = st.number_input('Width', min_value=500, max_value=2000, value=None, help=' Min value is 500 and max value is 2000', placeholder='Min value is 500 and max value is 2000')
+          qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help=' Min value is 1.00 and max value is 800.00', placeholder='Min value is 1.00 and max value is 800.00')
           # price = st.number_input('Selling price in $', min_value=10.00, value=None, help='Enter selling price in $. Min value is 10.00.', placeholder='Enter selling price in $. Min value is 10.00.')
           st.write(' ')
           st.write(' ')
@@ -128,7 +142,7 @@ if selected == "Predictor":
             days = (del_date - item_date).days
             Item_transform = ohe.transform([[item]])
         else:
-            st.error('Please fill in all the required fields.')
+            pass
 
         if None not in (qty, thick, width,  volume):
             qty_box = transform_single_value(qty, lambda_dict['quantity_tons'])
@@ -159,4 +173,66 @@ if selected == "Predictor":
             st.warning('Please ensure all input fields are filled correctly.')
 
     with tab1:
-        st.info('gvhgvg')
+        
+        status_options = ['Won', 'Lost', 'Not lost for AM', 'Revised', 'To be approved', 'Draft', 'Offered',  'Offerable',  'Wonderful']
+        
+        reg_col1, reg_col2 = st.columns(2)
+
+        with reg_col1:
+            reg_item_date = st.date_input('Item Date', min_value=six_months_ago, max_value=today, help='Enter product/order date, must be today or within the past six months', value=None,key='item_dt')
+            reg_del_date = st.date_input('Delivery Date', min_value=del_min, max_value=six_months_after, help='Enter product/order date, must be today or within the next six months', value=None,key='del_dt')
+            reg_item = st.selectbox('Select Item Type', item_type_options, index=None, help="Select Item type from the dropdown menu", placeholder="Select Item type from the dropdown menu",key='item')
+            reg_country = st.selectbox('Select Country Code', country_options, index=None, placeholder="Select Country Code from the list",key='ctry')
+            reg_app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='app')
+            reg_cust = st.number_input('Customer Number', min_value=30000000, max_value=39999999, value=None, help='Enter Customer number. Min value is 30000000 and max value is 39999999', placeholder='Enter Customer number. Min value is 30000000 and max value is 39999999',key='cust')
+            
+
+        with reg_col2:
+          reg_prod = st.selectbox('Select Product', product_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='prod')
+          reg_thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Min value is 0.10 and max value is 7.', placeholder='Min value is 0.10 and max value is 7.',key='thick')
+          reg_width = st.number_input('Width', min_value=500, max_value=2000, value=None, help=' Min value is 500 and max value is 2000', placeholder='Min value is 500 and max value is 2000',key='width')
+          reg_qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help=' Min value is 1.00 and max value is 800.00', placeholder='Min value is 1.00 and max value is 800.00',key='qty')
+          status = st.selectbox('Select Status', status_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='status')
+        
+          st.write('')
+          st.write(' ')
+          button = st.button('Predict Price',key='Reg')
+
+        del_year = None
+        item_month = None
+        Item_transform = None
+        reg_volume = None
+        reg_data = None
+
+        if None not in (reg_item_date, reg_del_date, reg_volume):
+            del_year = reg_del_date.year
+            reg_volume = float(reg_qty) * float(reg_thick) * float(reg_width)
+            status_transform = Reg_ohe.transform([[status]])
+        else:
+            pass
+
+        if None not in (reg_qty, reg_thick, reg_width,  reg_volume,reg_item_date, reg_data,status):
+            volume_box = transform_single_value(reg_volume, lambda_dict['volume'])
+            thick_box = transform_single_value(reg_thick, lambda_dict['thickness'])
+            width_box = transform_single_value(reg_width, lambda_dict['width'])
+            reg_data = np.array([[reg_cust, reg_country, reg_app, reg_prod,del_year, reg_item_date.month,thick_box,width_box,volume_box]])
+        
+        # st.write(status,'\n\n',Reg_ohe.transform([[status]]))
+        
+            reg_data = np.concatenate((reg_data,Reg_ohe.transform([[status]])), axis=1)
+        
+
+            reg_scaled_data = scale_reg.transform(reg_data)
+        # st.write(reg_scaled_data)
+
+        if button:
+            prediction = xgb_Reg.predict(reg_scaled_data)
+            # st.write(prediction)
+            
+            lambda_val = lambda_dict['selling_price']
+            
+            transformed_predict=reverse_boxcox_transform(prediction, lambda_val)
+            st.success(round(transformed_predict[0],2))
+                
+        else:
+            st.warning('Please ensure all input fields are filled correctly.')
