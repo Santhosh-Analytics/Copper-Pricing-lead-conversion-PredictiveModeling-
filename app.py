@@ -10,6 +10,57 @@ from streamlit_option_menu import option_menu
 from scipy.special import inv_boxcox
 
 
+
+# Set page configuration
+st.set_page_config(
+    layout="wide",
+    initial_sidebar_state="expanded",
+    page_title="Copper Modeling",
+    page_icon='https://www.shirepost.com/cdn/shop/files/WOR-HAM-RAW-CO-1.jpg?v=1710180524&width=1800',
+)
+
+
+# Injecting CSS for custom styling
+st.markdown("""
+    <style>
+    /* Tabs */
+    div.stTabs [data-baseweb="tab-list"] button {
+        font-size: 25px;
+        color: #ffffff;
+        background-color: #4CAF50;
+        padding: 10px 20px;
+        margin: 10px 2px;
+        border-radius: 10px;
+    }
+    div.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+        background-color: #009688;
+        color: white;
+    }
+    div.stTabs [data-baseweb="tab-list"] button:hover {
+        background-color: #3e8e41;
+        color: white;
+    }
+    /* Button */
+    .stButton>button {
+        font-size: 22px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+    .stButton>button:hover {
+        background-color: #3e8e41;
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Function to perform Box-Cox transformation on a single value using a given lambda
 def transform_single_value(value, lmbda):
     if value is None:
@@ -34,24 +85,19 @@ with open(r'pkls/scale_class.pkl', 'rb') as f:
 with open(r'pkls/xgb_classifier_model.pkl', 'rb') as f:
     xgb_classifier_model = pickle.load(f)
     
-with open(r'pkls\\Reg_ohe.pkl', 'rb') as f:
+with open(r'pkls/Reg_ohe.pkl', 'rb') as f:
     Reg_ohe = pickle.load(f)
     
-with open(r'pkls\\scale_reg.pkl', 'rb') as f:
+with open(r'pkls/scale_reg.pkl', 'rb') as f:
     scale_reg = pickle.load(f)
 
-with open(r'pkls\\xgb_regression_model.pkl', 'rb') as f:
+with open(r'pkls/xgb_regression_model.pkl', 'rb') as f:
     xgb_Reg = pickle.load(f)
     
-st.set_page_config(
-    layout="wide",
-    initial_sidebar_state="expanded",
-    page_title="Copper Modeling",
-    page_icon='https://www.shirepost.com/cdn/shop/files/WOR-HAM-RAW-CO-1.jpg?v=1710180524&width=1800',
-)
+
 
 with st.sidebar:
-    st.markdown("<hr style='border: 2px solid #ffef96;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: 2px solid #ffffff;'>", unsafe_allow_html=True)
     
     selected = option_menu(
         "Main Menu", ["About", 'Predictor'], 
@@ -60,12 +106,12 @@ with st.sidebar:
         default_index=0,
         styles={
             "container": {"padding": "0!important", "background-color": "gray"},
-            "icon": {"color": "rgb(235, 48, 84)", "font-size": "25px", "font-family": "inherit"},
+            "icon": {"color": "#000000", "font-size": "25px", "font-family": "Times New Roman"},
             "nav-link": {"font-family": "inherit", "font-size": "22px", "color": "#ffffff", "text-align": "left", "margin": "0px", "--hover-color": "#84706E"},
-            "nav-link-selected": {"font-family": "inherit", "background-color": "azure", "color": "#FF385C", "font-size": "25px"},
+            "nav-link-selected": {"font-family": "inherit", "background-color": "#ffffff", "color": "#55ACEE", "font-size": "25px"},
         }
     )
-    st.markdown("<hr style='border: 2px solid #ffef96;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: 2px solid #ffffff;'>", unsafe_allow_html=True)
 
 # st.markdown(""" <style> button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {font-size: 32px;} </style>""", unsafe_allow_html=True)
 # st.markdown('<style>div.css-1jpvgo6 {font-size: 18px; font-weight: bolder; font-family: inherit;} </style>', unsafe_allow_html=True)
@@ -110,7 +156,7 @@ if selected == "Predictor":
         six_months_after = today + timedelta(days=180 // 2)
         del_min = today + timedelta(days=2)
 
-        col1, col2 = st.columns(2)
+        col1, col, col2 = st.columns([2,2,1])
 
         with col1:
             item_date = st.date_input('Item Date', min_value=six_months_ago, max_value=today, help='Enter product/order date, must be today or within the past six months', value=None)
@@ -120,57 +166,61 @@ if selected == "Predictor":
             app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
             
 
-        with col2:
+        with col:
           prod = st.selectbox('Select Product', product_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
             # cust = st.number_input('Customer Number', min_value=30000000, max_value=39999999, value=None, help='Enter Customer number. Min value is 30000000 and max value is 39999999', placeholder='Enter Customer number. Min value is 30000000 and max value is 39999999')
           thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Min value is 0.10 and max value is 7.', placeholder='Min value is 0.10 and max value is 7.')
           width = st.number_input('Width', min_value=500, max_value=2000, value=None, help=' Min value is 500 and max value is 2000', placeholder='Min value is 500 and max value is 2000')
           qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help=' Min value is 1.00 and max value is 800.00', placeholder='Min value is 1.00 and max value is 800.00')
           # price = st.number_input('Selling price in $', min_value=10.00, value=None, help='Enter selling price in $. Min value is 10.00.', placeholder='Enter selling price in $. Min value is 10.00.')
+          
           st.write(' ')
           st.write(' ')
           button = st.button('Predict Lead')
+          
+        with col2:
+            volume = None
+            # unit_price = None
+            days = None
+            Item_transform = None
 
-        volume = None
-        # unit_price = None
-        days = None
-        Item_transform = None
+            if qty is not None and width is not None and thick is not None:
+                volume = float(qty) * float(thick) * float(width)
+                # unit_price = float(price) * float(qty) * float(thick)
+                days = (del_date - item_date).days
+                Item_transform = ohe.transform([[item]])
+            else:
+                pass
 
-        if qty is not None and width is not None and thick is not None:
-            volume = float(qty) * float(thick) * float(width)
-            # unit_price = float(price) * float(qty) * float(thick)
-            days = (del_date - item_date).days
-            Item_transform = ohe.transform([[item]])
-        else:
-            pass
+            if None not in (qty, thick, width,  volume):
+                qty_box = transform_single_value(qty, lambda_dict['quantity_tons'])
+                thick_box = transform_single_value(thick, lambda_dict['thickness'])
+                width_box = transform_single_value(width, lambda_dict['width'])
+                volume_box = transform_single_value(volume, lambda_dict['volume'])
+                # unit_price_box = transform_single_value(unit_price, lambda_dict['unit_price'])
+                # price_box = transform_single_value(price, lambda_dict['selling_price'])
 
-        if None not in (qty, thick, width,  volume):
-            qty_box = transform_single_value(qty, lambda_dict['quantity_tons'])
-            thick_box = transform_single_value(thick, lambda_dict['thickness'])
-            width_box = transform_single_value(width, lambda_dict['width'])
-            volume_box = transform_single_value(volume, lambda_dict['volume'])
-            # unit_price_box = transform_single_value(unit_price, lambda_dict['unit_price'])
-            # price_box = transform_single_value(price, lambda_dict['selling_price'])
+                data = np.array([[int(country), int(app), int(prod), int(days), float(qty_box), float(thick_box), float(width_box), float(volume_box)]])
+                st.write(item,'\n\n',Item_transform)
+                data = np.concatenate((data, Item_transform), axis=1)
+                # # indices_to_remove = [11, 15]  # Remove unnecessary indices
+                # # data = np.delete(data, indices_to_remove, axis=1)
+                # data = data.reshape(1, -1)
 
-            data = np.array([[int(country), int(app), int(prod), int(days), float(qty_box), float(thick_box), float(width_box), float(volume_box)]])
-            st.write(item,'\n\n',Item_transform)
-            data = np.concatenate((data, Item_transform), axis=1)
-            # # indices_to_remove = [11, 15]  # Remove unnecessary indices
-            # # data = np.delete(data, indices_to_remove, axis=1)
-            # data = data.reshape(1, -1)
+                scaled_data = scale_class.transform(data)
+                st.write(scaled_data)
 
-            scaled_data = scale_class.transform(data)
-            st.write(scaled_data)
+                if button:
+                    prediction = xgb_classifier_model.predict(scaled_data)
+                    st.write(prediction)
+                    if prediction == 1:
+                        st.success('Won')
+                    elif prediction==0:
+                        st.warning('Lost')
+                    elif data is None:
+                        st.error('Update all the fields and hit the button')
 
-            if button:
-                prediction = xgb_classifier_model.predict(scaled_data)
-                st.write(prediction)
-                if prediction == 1:
-                    st.success('Won')
-                elif prediction==0:
-                    st.warning('Lost')
-        else:
-            st.warning('Please ensure all input fields are filled correctly.')
+        st.warning('Please ensure all input fields are filled correctly.')
 
     with tab1:
         
@@ -228,11 +278,10 @@ if selected == "Predictor":
         if button:
             prediction = xgb_Reg.predict(reg_scaled_data)
             # st.write(prediction)
-            
             lambda_val = lambda_dict['selling_price']
-            
             transformed_predict=reverse_boxcox_transform(prediction, lambda_val)
-            st.success(round(transformed_predict[0],2))
+            rounded_prediction = round(transformed_predict[0], 2)
+            st.success(rounded_prediction)
                 
         else:
             st.warning('Please ensure all input fields are filled correctly.')
