@@ -17,7 +17,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
     page_title="Copper Modeling",
     page_icon=(r'asset/icon.jpeg')
-
+)
 
 # Injecting CSS for custom styling
 st.markdown("""
@@ -59,6 +59,34 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
+
+# Injecting HTML for custom styling
+
+st.markdown(
+    """
+    <style>
+    .custom-info-box {
+        background-color: rgba(61, 157, 243, 0.2) !important;  /* Background color similar to st.info */
+        padding: 10px;  /* Add some padding for spacing */
+        border-left: 10px solid #1E88E5;  /* Add a colored border on the left */
+        border-right: 0px solid #1E88E5;
+        border-up: 10px solid #1E88E5;
+        border-down: 10px solid #1E88E5;
+        border-radius: 20px;  /* Rounded corners */
+        font-family: Arial, sans-serif;  /* Font styling */
+        font-size: 18px;  /* Font size adjustment */
+        color: #ffffff;  /* Font color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+texts = """
+<div class="custom-info-box">
+    <strong>Information:</strong> Please update customer information to proceed.
+</div>
+"""
 
 # Function to perform Box-Cox transformation on a single value using a given lambda
 def transform_single_value(value, lmbda):
@@ -136,11 +164,13 @@ if selected == "About":
         Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request in the <a href="{}">GitHub Repository</a>.
     </p>""".format(github_url), unsafe_allow_html=True)
 
+
+
 if selected == "Predictor":
     tab, tab1 = st.tabs(["***Lead Classification***", "***Price Prediction***"])
 
     with tab:
-    
+
         # Options for various dropdowns
         item_type_options = ['W', 'WI', 'S', 'Others', 'PL', 'IPL', 'SLAWR']
         country_options = [78, 26, 25, 32, 27, 28, 84, 77, 30, 39, 79, 38, 40, 80, 113, 89, 107]
@@ -148,20 +178,19 @@ if selected == "Predictor":
         product_options =[611993,164141591,640665,1670798778,628377,1668701718,640405,1671863738,1332077137,1693867550,1668701376,1671876026,628117,164337175,1668701698,1693867563,1721130331,1282007633,628112,1665572374,1690738206,1722207579,611728,640400,611733,1668701725,164336407,1690738219,1665584320,1665572032,1665584642,929423819]
 
         # Define the date ranges
-        today = date.today()
+        today = date.today() 
         six_months_ago = today - timedelta(days=365 // 2)
         six_months_after = today + timedelta(days=180 // 2)
         del_min = today + timedelta(days=2)
 
-        col1, col, col2 = st.columns([2,.5,2])
+        col1, col, col2, col0, col3 = st.columns([2,.2,2,.2,2])
 
         with col1:
             cust = st.number_input('Customer Number', min_value=30000000, max_value=39999999, value=None, help='Enter Customer number. Min value is 30000000 and max value is 39999999', placeholder='Enter Customer number. Min value is 30000000 and max value is 39999999')
             item_date = st.date_input('Item Date',   help='Enter product/order date, must be today or within the past six months', value=None)
-            del_date = st.date_input('Delivery Date',  help='Enter product/order date, must be today or within the next six months', value=None)
             item = st.selectbox('Select Item Type', item_type_options, index=None, help="Select Item type from the dropdown menu", placeholder="Select Item type from the dropdown menu")
             country = st.selectbox('Select Country Code', country_options, index=None, placeholder="Select Country Code from the list")
-            app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
+            
             
 
         with col2:
@@ -169,12 +198,31 @@ if selected == "Predictor":
             thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Min value is 0.10 and max value is 7.', placeholder='Min value is 0.10 and max value is 7.')
             width = st.number_input('Width', min_value=500, max_value=2000, value=None, help=' Min value is 500 and max value is 2000', placeholder='Min value is 500 and max value is 2000')
             qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help=' Min value is 1.00 and max value is 800.00', placeholder='Min value is 1.00 and max value is 800.00')
+            
+        def check_conditions():
+            return (
+                cust is not None and cust > 0 and
+                item_date is not None and
+                item is not None and
+                country is not None and
+                app is not None and
+                prod is not None and
+                thick is not None and thick > 0 and
+                width is not None and width > 0 and
+                qty is not None and qty > 0 and
+                price is not None and price > 0
+            )
+            
+        with col3:
+            del_date = st.date_input('Delivery Date',  help='Enter product/order date, must be today or within the next six months', value=None)
             price = st.number_input('Selling price in $', min_value=10.00, value=None, help='Enter selling price in $. Min value is 10.00.', placeholder='Enter selling price in $. Min value is 10.00.')
+            app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown')
             
             st.write(' ')
             st.write(' ')
-            button = st.button('Predict Lead')
-            
+            button = st.button('Predict Lead') if check_conditions() else st.markdown(texts,unsafe_allow_html=True)
+        
+        days = None
         if None not in (item_date,del_date):
             days = (del_date - item_date).days
             
@@ -214,15 +262,35 @@ if selected == "Predictor":
 
         
         data = np.array([[cust,country, app, prod, days,del_month_class,del_year_class,item_day_class,item_month_class,item_year_class,qty_box, thick_box,width_box,price_box, volume_box,unit_price_box]])
-        st.write(data)
+        # st.write(data)
         
         Item_transform = ohe.transform([[item]]) if item is not None else None
 
-        st.write(item,'\n\n',Item_transform)
+        # st.write(item,'\n\n',Item_transform)
         
-        
-        data_final = np.append(data, Item_transform, axis=1) if data is not None  else None
-        st.write(data_final)
+        def check_conditions():
+            return (
+                cust is not None and cust > 0 and
+                item_date is not None and
+                days is not None and
+                country is not None and
+                del_month_class is not None and
+                del_year_class is not None and 
+                item_day_class is not None and
+                item_month_class is not None and
+                item_year_class is not None and
+                width_box is not None and
+                volume_box is not None and
+                unit_price_box is not None and
+                app is not None and
+                prod is not None and
+                thick_box is not None and thick > 0 and
+                width_box is not None and width > 0 and
+                qty_box is not None and qty > 0 and
+                price_box is not None and price > 0
+            )
+        data_final = np.append(data, Item_transform, axis=1) if check_conditions() else None
+        # st.write(data_final)
         
         # reg_scaled_data = robust_scaler.transform(reg_data)  if reg_data is not None  else None
         # # st.write(reg_scaled_data)
@@ -233,12 +301,15 @@ if selected == "Predictor":
         # st.write(scaled_data)
             
 
-    if button and data_final is not None:
+    if (button and check_conditions()):
+        
+        data_final = np.append(data, Item_transform, axis=1) if data is not None  else None
+        # st.write(data_final)
         
         scaled_data = scale_class.transform(data_final)
-        st.write(scaled_data)
+        # st.write(scaled_data)
         prediction = xgb_classifier_model.predict(scaled_data)
-        st.write(prediction)
+        # st.write(prediction)
         if prediction == 1:
             st.snow()
             st.success('Won')
@@ -253,14 +324,12 @@ if selected == "Predictor":
         
         status_options = ['Won', 'Lost', 'Not lost for AM', 'Revised', 'To be approved', 'Draft', 'Offered',  'Offerable',  'Wonderful']
         
-        reg_col1, reg_col2 = st.columns(2)
+        reg_col1,col0, reg_col2, col1, reg_col3 = st.columns([1,.1,1,.1,1])
 
         with reg_col1:
             reg_item_date = st.date_input('Item Date',  help='Enter product/order date', value=None,key='item_dt')
-            reg_del_date = st.date_input('Delivery Date',  help='Enter delivery date', value=None,key='del_dt')
             reg_item = st.selectbox('Select Item Type', item_type_options, index=None, help="Select Item type from the dropdown menu", placeholder="Select Item type from the dropdown menu",key='item')
             reg_country = st.selectbox('Select Country Code', country_options, index=None, placeholder="Select Country Code from the list",key='ctry')
-            reg_app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='app')
             reg_cust = st.number_input('Customer Number', min_value=30000000, max_value=39999999, value=None, help='Enter Customer number. Min value is 30000000 and max value is 39999999', placeholder='Enter Customer number. Min value is 30000000 and max value is 39999999',key='cust')
             
 
@@ -270,12 +339,18 @@ if selected == "Predictor":
             reg_thick = st.number_input('Thickness', min_value=0.10, max_value=7.0, value=None, help='Min value is 0.10 and max value is 7.', placeholder='Min value is 0.10 and max value is 7.',key='thick')
             reg_width = st.number_input('Width', min_value=500, max_value=2000, value=None, help=' Min value is 500 and max value is 2000', placeholder='Min value is 500 and max value is 2000',key='width')
             reg_qty = st.number_input('Quantity in tons', min_value=1.00, max_value=800.00, value=None, help=' Min value is 1.00 and max value is 800.00', placeholder='Min value is 1.00 and max value is 800.00',key='qty')
-            status = st.selectbox('Select Status', status_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='status')
             
+            
+            
+        
+        with reg_col3:
+            reg_del_date = st.date_input('Delivery Date',  help='Enter delivery date', value=None,key='del_dt')
+            status = st.selectbox('Select Status', status_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='status')
+            reg_app = st.selectbox('Select Application', application_options,index=None, help=' Select from the dropdown' ,placeholder='Select from the dropdown',key='app')
             all_valid = all(var is not None for var in (reg_item_date, reg_del_date, reg_item, reg_country, reg_app, reg_cust, reg_prod, reg_thick, reg_width, reg_qty, status))
             st.write('')
             st.write(' ')
-            button = st.button('Predict Price',key='Reg',) if all_valid else st.warning('Please ensure all input fields are filled correctly.')
+            button = st.button('Predict Price',key='Reg',) if all_valid else st.markdown(texts,unsafe_allow_html=True)
 
           
         item_type_mapping = {'WI': 0, 'PL': 1, 'Others': 2, 'IPL': 3, 'S': 4, 'W': 5, 'SLAWR': 7}
@@ -309,7 +384,7 @@ if selected == "Predictor":
         reg_data = np.array([[reg_cust, reg_country, item_type_label,app_label, reg_prod, del_time,del_month,del_year, item_day,item_month,item_year, qty_box,thick_box, width_box, volume_box]]) if None not in (reg_cust, reg_country, reg_app, reg_prod, del_year, item_month, thick_box, width_box, volume_box) else None
 
 
-        
+        ohe_data = None
         if status is not None:
             ohe_data = Reg_ohe.transform([[status]]) 
         
@@ -317,10 +392,12 @@ if selected == "Predictor":
         # st.write(reg_data.shape)
         # st.write(ohe_data.shape)
 
-        reg_data = np.append(reg_data, ohe_data, axis=1) if reg_data is not None  else None
+        reg_data = np.append(reg_data, ohe_data, axis=1) if ohe_data is not None and app_label is not None  else None
         # st.write(reg_data)
         
-        reg_scaled_data = robust_scaler.transform(reg_data)  if reg_data is not None  else None
+        # st.write(robust_scaler)
+        
+        reg_scaled_data = scale_reg.transform(reg_data)  if reg_data is not None  else None
         # st.write(reg_scaled_data)
         
 
@@ -336,7 +413,7 @@ if selected == "Predictor":
             lambda_val = lambda_dict['selling_price'] 
             transformed_predict=reverse_boxcox_transform(prediction, lambda_val) if reg_data is not None else None
             rounded_prediction = round(transformed_predict[0],2)
-            st.success(f'Based on the input, the predicted price is,  {rounded_prediction:.2f}')
+            st.success(f'Based on the input, the predicted price is  {rounded_prediction:.2f} USD')
             st.snow()
                 
         else:
