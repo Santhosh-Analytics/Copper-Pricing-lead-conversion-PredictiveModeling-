@@ -16,8 +16,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     page_title="Copper Modeling",
-    page_icon='https://www.shirepost.com/cdn/shop/files/WOR-HAM-RAW-CO-1.jpg?v=1710180524&width=1800',
-)
+    page_icon=(r'asset/icon.jpeg')
 
 
 # Injecting CSS for custom styling
