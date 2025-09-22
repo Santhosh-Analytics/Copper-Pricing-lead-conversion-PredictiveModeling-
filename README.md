@@ -86,23 +86,24 @@ Before running the project, ensure you have the following prerequisites installe
 
 ## Usage
 
-Prepare the data:
-
-Obtain the copper industry dataset and place it in the appropriate directory.
-
-## Run the data preprocessing scripts:
-
-Execute the scripts to handle missing values, treat outliers, and address skewness in the dataset.
-Perform feature engineering and encoding as required.
-
-## Train the models:
-
-Run the scripts to train the regression model for predicting 'Selling_Price'.
-Train the classification model for predicting lead status (WON or LOST).
+<!-- Prepare the data: -->
+<!---->
+<!-- Obtain the copper industry dataset and place it in the appropriate directory. -->
+<!---->
+<!-- ## Run the data preprocessing scripts: -->
+<!---->
+<!-- Execute the scripts to handle missing values, treat outliers, and address skewness in the dataset. -->
+<!-- Perform feature engineering and encoding as required. -->
+<!---->
+<!-- ## Train the models: -->
+<!---->
+<!-- Run the scripts to train the regression model for predicting 'Selling_Price'. -->
+<!-- Train the classification model for predicting lead status (WON or LOST). -->
+<!---->
 
 ## Launch the Streamlit application:
 
-Execute the Streamlit script to start the interactive application.
+Execute the Streamlit script (app.py) to start the interactive application.
 Input the required column values and obtain predictions for 'Selling_Price' or 'Status' (WON/LOST).
 
 ## Models
@@ -122,11 +123,11 @@ Contributions to this project are welcome. If you find any issues or have sugges
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the Apache-2.0 License.
 
 ## Contact
 
 If you have any questions or need further assistance, feel free to reach out to the project maintainers:
 
-Name: [Your Name]
-Email: [your-email@example.com]
+Name: Santhosh Kumar
+Email: sansuganyas@outlook.com
