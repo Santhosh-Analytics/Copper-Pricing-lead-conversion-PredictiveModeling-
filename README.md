@@ -39,17 +39,17 @@ The project addresses the following objectives:
 
 ## Outcome:
 
-1.Tech Stack: Python, Streamlit, Docker, XGBoost, Git, GitHub
+1. Tech Stack: Python, Streamlit, Docker, XGBoost, Git, GitHub
 
-1.Developed a dual-purpose ML system for industrial sales optimization: regression for copper price prediction and classification for lead conversion.
+2. Developed a dual-purpose ML system for industrial sales optimization: regression for copper price prediction and classification for lead conversion.
 
-1.Achieved 0.96/0.99 accuracy and 0.97/0.99 F1-score (classification); 0.94/0.95 R² and RMSE of 24.23/22.43 (regression).
+3. Achieved 0.96/0.99 accuracy and 0.97/0.99 F1-score (classification); 0.94/0.95 R² and RMSE of 24.23/22.43 (regression).
 
-1.Engineered 12 domain-specific features and addressed a 1:4 class imbalance using SMOTETomek, improving minority class recall.
+4. Engineered 12 domain-specific features and addressed a 1:4 class imbalance using SMOTETomek, improving minority class recall.
 
-1.Deployed real-time prediction app with Streamlit and Docker, enabling interactive inference for copper pricing and lead conversion scoring.
+5. Deployed real-time prediction app with Streamlit and Docker, enabling interactive inference for copper pricing and lead conversion scoring.
 
-1.Reduced pricing decision time from 2 hours to 2 minutes, significantly improving operational efficiency.
+6. Reduced pricing decision time from 2 hours to 2 minutes, significantly improving operational efficiency.
 
 ## Data Source
 
