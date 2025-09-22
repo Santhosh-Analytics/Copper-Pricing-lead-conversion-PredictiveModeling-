@@ -1,4 +1,4 @@
-name: /run/media/E_Drive/Technology/Python Project/Capstone/Copper_Modeling/copper_env
+name: copper_env
 channels:
   - conda-forge
   - defaults
@@ -310,4 +310,4 @@ dependencies:
       - streamlit==1.39.0
       - tenacity==9.0.0
       - toolz==1.0.0
-prefix: /run/media/E_Drive/Technology/Python Project/Capstone/Copper_Modeling/copper_env
+prefix: copper_env
